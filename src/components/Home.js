@@ -1,31 +1,53 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Container, Box, Button, Grid, Card, CardContent } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Box,
+  Paper,
+} from '@mui/material';
+
+const drawerWidth = 240;
 
 const Home = () => {
   return (
-    <>
-      <AppBar position="static">
+    <Box sx={{ display: 'flex' }}>
+      {/* Adjust for sidebar spacing */}
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h4"
+            align="center"
+            fontWeight="bold"
+            gutterBottom
+          >
             School BPS
           </Typography>
+
         </Toolbar>
       </AppBar>
 
-      <Box sx={{ py: 8, textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, marginLeft: `${drawerWidth}px`, paddingTop: '64px' }}
+      >
         <Container maxWidth="md">
-          <Typography variant="h3" gutterBottom>
-            Welcome to School BPS
-          </Typography>
-          <Typography variant="h6" paragraph>
-            Empowering students with seamless learning and school communication tools.
-          </Typography>
+          <Paper elevation={3} sx={{ p: 5, textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+            <Typography variant="h3" gutterBottom>
+              Welcome to School BPS
+            </Typography>
+            <Typography variant="h6" paragraph>
+              Empowering students with seamless learning and school communication tools.
+            </Typography>
+          </Paper>
         </Container>
       </Box>
-    </>
+    </Box>
   );
 };
 
 export default Home;
-
-

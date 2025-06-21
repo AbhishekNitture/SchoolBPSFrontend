@@ -285,69 +285,75 @@ export default function Users() {
     
 
     return (
-        <>
-            <h2 className="text-center">List of Available Users</h2>
-            <div className="d-flex justify-content-center mt-4">
-                <div className="col-md-1">
-                    <label className="mt-1"><b>Select Role</b></label>
-                </div>
-                <div className="col-md-3">
-                    <select
-                        className="form-select"
-                        onChange={handleChangeSelection}
-                    >
-                        <option value="">Choose...</option>
-                        {Array.isArray(roles) && roles.map(role => (
-                            <option key={role.id} value={role.id}>
-                                {role.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-            <div className="container mt-2">
-                {selectedRoleId && (
-                    <Button variant="contained" onClick={handleAddUsersClick}>
-                        Add User
-                    </Button>
-                )}
+    <div className="container-fluid" style={{ paddingLeft: '260px' }}>
+      <div className="mx-auto" style={{ maxWidth: '1200px' }}>
+        <h2 className="text-center mt-3">List of Available Users</h2>
 
-                <Paper sx={{ height: 500, width: '100%', marginTop: 2}}>
-                    <DataGrid
-                        rows={users}
-                        columns={columns}
-                        pageSizeOptions={[5, 10, 20]}
-                        disableRowSelectionOnClick
-                        getRowId={(row) => row.id} 
-                    />
-                </Paper>
+        <div className="container mt-4">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-md-2">
+              <label className="mt-1"><b>Select Role</b></label>
             </div>
-            <AddUserModal
-                onSave={handleSaveRole}
-                onClose={handleCloseModal}
-                showModal={showModal}
-                title={title}
-                setTitle={setTitle}
-                login={login}
-                setLogin={setLogin}
-                surname={surname}
-                setSurname={setSurname}
-                EmailId={emailId}  
-                setEmailId={setEmailId} 
-                firstname={firstname}
-                setFirstname={setFirstname}
-                expiredon={expiredon} 
-                setExpiredon={setExpiredon} 
-                isActive={isActive}
-                setIsActive={setIsActive}
-                Error={Error} 
-                headingtitle = {isEditMode ? "Edit User" : "Add User"}
-                IsEdit = {isEditMode}
-                onUpdate={handleUpdateClick}
-                
+            <div className="col-md-4">
+              <select
+                className="form-select"
+                onChange={handleChangeSelection}
+              >
+                <option value="">Choose...</option>
+                {Array.isArray(roles) && roles.map(role => (
+                  <option key={role.id} value={role.id}>
+                    {role.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mt-3">
+          {selectedRoleId && (
+            <Button variant="contained" onClick={handleAddUsersClick}>
+              Add User
+            </Button>
+          )}
+
+          <Paper sx={{ height: 500, width: '100%', marginTop: 2, overflowX: 'auto' }}>
+            <DataGrid
+              rows={users}
+              columns={columns}
+              pageSizeOptions={[5, 10, 20]}
+              disableRowSelectionOnClick
+              getRowId={(row) => row.id}
             />
+          </Paper>
+        </div>
 
-            <ToastContainer position="top-right" />
-        </>
-    );
+        <AddUserModal
+          onSave={handleSaveRole}
+          onClose={handleCloseModal}
+          showModal={showModal}
+          title={title}
+          setTitle={setTitle}
+          login={login}
+          setLogin={setLogin}
+          surname={surname}
+          setSurname={setSurname}
+          EmailId={emailId}
+          setEmailId={setEmailId}
+          firstname={firstname}
+          setFirstname={setFirstname}
+          expiredon={expiredon}
+          setExpiredon={setExpiredon}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          Error={Error}
+          headingtitle={isEditMode ? "Edit User" : "Add User"}
+          IsEdit={isEditMode}
+          onUpdate={handleUpdateClick}
+        />
+
+        <ToastContainer position="top-right" />
+      </div>
+    </div>
+  );
 }

@@ -1,85 +1,83 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../CSS/Navbar.css';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  CssBaseline,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Box,
+  Button,
+} from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import PeopleIcon from '@mui/icons-material/People';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import WorkIcon from '@mui/icons-material/Work';
 
-export default function Navbar({ onLogout }) {
+const drawerWidth = 240;
+
+export default function DashboardLayout({ onLogout, children }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Call the onLogout function from the parent to update state
     onLogout();
-
-    // Navigate to login page
     navigate('/');
   };
 
   return (
-    <>
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-  <div className="container-fluid">
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <div className="ms-auto d-flex align-items-center">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="navbar-brand" to="/Home">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item dropdown mr-5">
-            <a
-              className="navbar-brand dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Tools
-            </a>
-            <ul className="dropdown-menu">
-              <li className="dropdown-submenu">
-                <a className="dropdown-item" role="button">
-                  Users
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" to="/Users" role="button">
-                      Users
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Roles">
-                      Roles
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Employees">
-                      Employees
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <button className="btn btn-danger ms-3" onClick={handleLogout}>
-          Log out
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
 
-    </>
+      {/* AppBar */}
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6" noWrap>
+            School BPS 
+          </Typography>
+          <Button color="inherit" variant="outlined" onClick={handleLogout}>
+            Log out
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* Sidebar Drawer */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+        <Toolbar />
+        <List>
+          <ListItem button component={RouterLink} to="/Home">
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component={RouterLink} to="/Users">
+            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemText primary="Users" />
+          </ListItem>
+          <ListItem button component={RouterLink} to="/Roles">
+            <ListItemIcon><AssignmentIndIcon /></ListItemIcon>
+            <ListItemText primary="Roles" />
+          </ListItem>
+          <ListItem button component={RouterLink} to="/Employees">
+            <ListItemIcon><WorkIcon /></ListItemIcon>
+            <ListItemText primary="Employees" />
+          </ListItem>
+        </List>
+      </Drawer>
+
+      {/* Content Area */}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        {children}
+      </Box>
+    </Box>
   );
 }

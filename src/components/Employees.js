@@ -140,19 +140,24 @@ export default function Employees() {
   };
 
 
-  return (
-    <div style={{ padding: "20px" }}>
+ return (
+    <div style={{ padding: '20px', paddingLeft: '260px' /* adjust for sidebar */ }}>
       <Grid container spacing={4}>
+        {/* Form Section */}
         <Grid item xs={12} md={4}>
           <h2>{selectedEmployeeId ? "Edit Employee" : "Create Employee"}</h2>
-          {message && <Typography variant="body1" color="success.main" align="center">{message}</Typography>}
-          <form>
+          {message && (
+            <Typography variant="body1" color="success.main" align="center">
+              {message}
+            </Typography>
+          )}
+          <form onSubmit={IsEdit ? handleUpdate : handleSubmit}>
             <TextField
               label="Name"
               variant="outlined"
               fullWidth
               value={name}
-              onChange={(e) => setName(e.target.value)}           
+              onChange={(e) => setName(e.target.value)}
               margin="normal"
             />
             <TextField
@@ -160,12 +165,11 @@ export default function Employees() {
               variant="outlined"
               fullWidth
               value={department}
-              onChange={(e) => setDepartment(e.target.value)}            
+              onChange={(e) => setDepartment(e.target.value)}
               margin="normal"
             />
-
             {imagePreview && (
-              <div style={{ marginBottom: "10px", textAlign: "center" }}>
+              <div style={{ textAlign: "center", marginBottom: "10px" }}>
                 <img
                   src={imagePreview}
                   alt="Profile Preview"
@@ -173,13 +177,11 @@ export default function Employees() {
                     width: "100px",
                     height: "100px",
                     borderRadius: "50%",
-                    objectFit: "cover",
-                    marginBottom: "10px",
+                    objectFit: "cover"
                   }}
                 />
               </div>
             )}
-
             <input
               type="file"
               id="profileImage"
@@ -187,18 +189,17 @@ export default function Employees() {
               style={{ marginBottom: "10px" }}
             />
             <Button
-             onClick={IsEdit ? handleUpdate : handleSubmit}
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              
             >
-            {IsEdit ? "Update" : "Submit"}
+              {IsEdit ? "Update" : "Submit"}
             </Button>
           </form>
         </Grid>
 
+        {/* Employee Cards Section */}
         <Grid item xs={12} md={8}>
           <h2>Employee List</h2>
           <Grid container spacing={2}>
@@ -209,15 +210,18 @@ export default function Employees() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
                     textAlign: "center",
                     transition: "transform 0.3s ease",
                     transform: hoveredIndex === index ? "scale(1.05)" : "scale(1)",
-                    boxShadow: hoveredIndex === index ? "0 4px 8px rgba(0, 0, 0, 0.3)" : "none",
+                    boxShadow:
+                      hoveredIndex === index
+                        ? "0 4px 8px rgba(0, 0, 0, 0.3)"
+                        : "none",
+                    cursor: "pointer"
                   }}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => handleCardClick(employee.id)} // Load data on card click
+                  onClick={() => handleCardClick(employee.id)}
                 >
                   <img
                     src={`https://localhost:44384${employee.profileImagePath}`}
@@ -227,7 +231,7 @@ export default function Employees() {
                       height: "100px",
                       borderRadius: "50%",
                       objectFit: "cover",
-                      marginBottom: "10px",
+                      marginTop: "10px"
                     }}
                   />
                   <CardContent>

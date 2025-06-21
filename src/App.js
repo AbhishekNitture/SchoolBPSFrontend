@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
       {isLoggedIn && <Navbar onLogout={handleLogout} />}
-      <div className="container" style={{ marginTop: isLoggedIn ? '100px' : '0' }}>
+      <div className="container" style={{ marginTop: isLoggedIn ? '5px' : '0' }}>
         <Routes>
           {!isLoggedIn ? (
             <>
