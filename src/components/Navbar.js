@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
+import SchoolIcon from '@mui/icons-material/School';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import WorkIcon from '@mui/icons-material/Work';
 
@@ -69,6 +70,10 @@ export default function DashboardLayout({ onLogout, children }) {
           <ListItem button component={RouterLink} to="/Employees">
             <ListItemIcon><WorkIcon /></ListItemIcon>
             <ListItemText primary="Employees" />
+          </ListItem>
+           <ListItem button component={RouterLink} to="/Schools">
+            <ListItemIcon><SchoolIcon /></ListItemIcon>
+            <ListItemText primary="Schools" />
           </ListItem>
         </List>
       </Drawer>

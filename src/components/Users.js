@@ -246,16 +246,16 @@ export default function Users() {
 
     
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'title', headerName: 'Title', width: 120 },
-        { field: 'firstname', headerName: 'First Name', width: 200 },
-        { field: 'login', headerName: 'Login', width: 200 },
-        { field: 'surname', headerName: 'Surname', width: 200 }, 
-        { field: 'emailid', headerName: 'Email', width: 200 }, 
+        { field: 'id', headerName: 'ID', flex: 1 },
+        { field: 'title', headerName: 'Title', flex: 1 },
+        { field: 'firstname', headerName: 'First Name', flex: 1 },
+        { field: 'login', headerName: 'Login', flex: 1 },
+        { field: 'surname', headerName: 'Surname', flex: 1 }, 
+        { field: 'emailid', headerName: 'Email', flex: 2 }, 
         {
             field: 'isActive',
             headerName: 'Active',
-            width: 100,
+            flex: 1,
             renderCell: (params) => (
                 <input type="checkbox" checked={params.value} disabled />
             ),
@@ -263,7 +263,7 @@ export default function Users() {
         {
             field: 'actions',
             headerName: 'Actions',
-            width: 200,
+            flex: 2,
             renderCell: (params) => (
                 <>
                     <Button
