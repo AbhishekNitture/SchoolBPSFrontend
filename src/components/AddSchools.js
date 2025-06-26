@@ -25,6 +25,9 @@ export default function AddSchools({
   scEarlyFunding,
   setScEarlyFunding,
   Error,
+  IsEdit,
+  OnUpdate,
+  headerText,
 }){
    
 
@@ -46,7 +49,7 @@ export default function AddSchools({
          >
         <ModalClose />
                 <Typography level="h5" component="h2" mb={2}>
-                    Add Schools
+                    {headerText}
                 </Typography>
                 <Stack direction="row" spacing={2}>
                     <FormControl sx={{ flex: 1 }}>
@@ -135,7 +138,7 @@ export default function AddSchools({
              </Stack>
             <Stack direction="row" spacing={2} justifyContent="flex-end" mt={3}>
                 <Button color="neutral" onClick={onClose}>Close</Button>
-                <Button color="primary" onClick={OnSave}>Save</Button>
+                <Button color="primary" onClick={IsEdit ? OnUpdate : OnSave}>Save</Button>
             </Stack>
                 
        </ModalDialog>

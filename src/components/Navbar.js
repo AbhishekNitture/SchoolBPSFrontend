@@ -67,14 +67,14 @@ export default function DashboardLayout({ onLogout, children }) {
             <ListItemIcon><AssignmentIndIcon /></ListItemIcon>
             <ListItemText primary="Roles" />
           </ListItem>
-          <ListItem button component={RouterLink} to="/Employees">
-            <ListItemIcon><WorkIcon /></ListItemIcon>
-            <ListItemText primary="Employees" />
-          </ListItem>
-           <ListItem button component={RouterLink} to="/Schools">
+          <ListItem button component={RouterLink} to="/Schools">
             <ListItemIcon><SchoolIcon /></ListItemIcon>
             <ListItemText primary="Schools" />
           </ListItem>
+          <ListItem button component={RouterLink} to="/Employees">
+            <ListItemIcon><WorkIcon /></ListItemIcon>
+            <ListItemText primary="Employees" />
+          </ListItem>          
         </List>
       </Drawer>
 
