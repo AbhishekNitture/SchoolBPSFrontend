@@ -36,9 +36,11 @@ export default function DashboardLayout({ onLogout, children }) {
       {/* AppBar */}
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6" noWrap>
-            School BPS 
-          </Typography>
+          <img
+            src="/BPS_logo.gif"
+            alt="School Logo"
+            style={{ height: '40px' }} // adjust size as needed
+          />
           <Button color="inherit" variant="outlined" onClick={handleLogout}>
             Log out
           </Button>

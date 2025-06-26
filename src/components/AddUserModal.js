@@ -42,7 +42,11 @@ export default function AddUserModal({
     const formattedExpiredon = expiredon ? format(new Date(expiredon), 'yyyy-MM-dd') : '';
 
     return (
-        <Modal open={showModal} onClose={onClose}>
+        <Modal open={showModal} onClose={(event,reason)=>{
+            if (reason !== "backdropClick"){
+                onClose(event,reason);
+            }
+        }}>
             <ModalDialog layout="center" size="lg" variant="soft">
                 <ModalClose />
                 <Typography level="h5" component="h2" mb={2}>

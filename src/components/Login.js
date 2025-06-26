@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Container, Alert } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Alert,
+  CssBaseline
+} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
+    },
+    primary: {
+      main: '#90caf9',
+    },
+  },
+});
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // To display error messages
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear any previous errors
-
+    setError('');
     try {
-      // Replace with your backend API URL
       const response = await fetch('https://localhost:44384/api/Login', {
         method: 'POST',
         headers: {
@@ -23,7 +43,7 @@ export default function Login({ onLogin }) {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        onLogin(); // Trigger successful login
+        onLogin();
       } else {
         setError(data.message || 'Invalid email or password');
       }
@@ -33,57 +53,64 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          mt: 8,
-          p: 4,
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: 'white',
-        }}
-      >
-        <Typography variant="h4" align="center" gutterBottom>
-          Login
-        </Typography>
-
-        {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}
-
-        <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <TextField
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ mt: 2 }}
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            mt: 8,
+            p: 4,
+            borderRadius: 2,
+            boxShadow: 4,
+            backgroundColor: 'background.paper',
+          }}
         >
-          Login
-        </Button>
-      </Box>
-    </Container>
+          <Typography variant="h4" align="center" gutterBottom>
+            Login
+          </Typography>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+
+          <TextField
+            label="Email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{
+              mt: 2,
+              boxShadow: '0 0 10px #90caf9',
+              fontWeight: 'bold',
+            }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }

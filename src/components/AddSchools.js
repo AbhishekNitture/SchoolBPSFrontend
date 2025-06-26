@@ -30,7 +30,6 @@ export default function AddSchools({
   headerText,
 }){
    
-
     return(
        <Modal
          open={show}

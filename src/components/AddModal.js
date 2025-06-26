@@ -19,7 +19,11 @@ export default function AddModal({
     return (
         <Modal
             open={show}
-            onClose={onClose}
+            onClose={(event,reason)=>{
+                if(reason!=="backdropClick"){
+                    onClose(event,reason);
+                }
+            }}
         >
             <ModalDialog
                 layout="center"

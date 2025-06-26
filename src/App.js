@@ -11,25 +11,22 @@ import Schools from './components/Schools';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check login state from localStorage on component mount
-  useEffect(() => {
-    const loggedIn = localStorage.getItem('isLoggedIn');
-    if (loggedIn === 'true') {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogin = () => {
-    // On successful login, set isLoggedIn to true
+useEffect(() => {
+  const loggedIn = sessionStorage.getItem('isLoggedIn');
+  if (loggedIn === 'true') {
     setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
-  };
+  }
+}, []);
 
-  const handleLogout = () => {
-    // On logout, set isLoggedIn to false and clear localStorage
-    setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
-  };
+const handleLogin = () => {
+  setIsLoggedIn(true);
+  sessionStorage.setItem('isLoggedIn', 'true');
+};
+
+const handleLogout = () => {
+  setIsLoggedIn(false);
+  sessionStorage.removeItem('isLoggedIn');
+};
 
   return (
     <Router>
