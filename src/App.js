@@ -7,6 +7,7 @@ import Users from './components/Users';
 import Employees from './components/Employees';
 import Login from './components/Login';
 import Schools from './components/Schools';
+import Products from './components/Products';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ const handleLogout = () => {
               <Route path="/Users" element={<Users />} />
               <Route path="/Employees" element={<Employees />} />
               <Route path="/Schools" element={<Schools />} />
+              <Route path="/Products" element={<Products />} />
               <Route path="*" element={<Navigate to="/Home" />} />
             </>
           )}

@@ -18,6 +18,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import SchoolIcon from '@mui/icons-material/School';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import WorkIcon from '@mui/icons-material/Work';
+import ProductIcon from '@mui/icons-material/ShoppingCart';
 
 const drawerWidth = 240;
 
@@ -76,7 +77,11 @@ export default function DashboardLayout({ onLogout, children }) {
           <ListItem button component={RouterLink} to="/Employees">
             <ListItemIcon><WorkIcon /></ListItemIcon>
             <ListItemText primary="Employees" />
-          </ListItem>          
+          </ListItem>       
+          <ListItem button component={RouterLink} to="/Products">
+            <ListItemIcon><ProductIcon /></ListItemIcon>
+            <ListItemText primary="Products" />
+          </ListItem>      
         </List>
       </Drawer>
 
