@@ -27,6 +27,7 @@ const VisuallyHiddenInput = styled("input")({
 
 export default function AddProductModal({
   onSave,
+  onUpdate,
   showProductModal,
   onClose,
   headerText,
@@ -38,11 +39,9 @@ export default function AddProductModal({
   setProductDescription,
   productCost,
   setProductCost,
-  productImage,
-  setProductImage,
   ImageChange,
-  imagePreview,
-  setImagePreview,
+  imagePreview, 
+  isEditMode,
 }) {
   return (
     <Modal
@@ -146,7 +145,7 @@ export default function AddProductModal({
           <Button color="neutral" variant="contained" onClick={onClose}>
             Close
           </Button>
-          <Button color="primary" variant="contained" onClick={onSave}>
+          <Button color="primary" variant="contained" onClick={isEditMode ? onUpdate : onSave}>
             Save
           </Button>
         </Stack>

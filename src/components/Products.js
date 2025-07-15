@@ -147,6 +147,43 @@ export default function Products() {
     fetchProducts();
   }, []);
 
+  const handleUpdateClick = async () => { 
+    if(!productId || !productTitle || !productName || !productDescription || !productCost){
+      toast.error("Please fill in all fields");
+      return;
+    }
+    const updatedProduct = {     
+      productTitle: productTitle,
+      productName: productName,
+      productDescription: productDescription,
+      productCost: productCost,
+      productImage: productImage,
+    }
+    try
+    {
+     const response = await fetch(`https://localhost:44384/api/Product/${productId}`,{
+        method : "PUT",
+        headers : {
+          "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(updatedProduct),
+     });
+      if(response.ok){
+        const result = await response.json();
+        setProducts((prev)=>prev.map((product)=>product.productId===result.productId ? {...product, ...updatedProduct} : product))
+        setShowModal(false);
+        toast.success("Product updated successfully");
+      }
+      else{
+        toast.error("Error updating product");
+      }
+    }
+    catch
+    {
+       toast.error("Error updating product");
+    }
+  }
+
   const columns = [
     { field: "productTitle", headerName: "Product Title", flex: 1 },
     { field: "productName", headerName: "Product Name", flex: 1 },
@@ -177,6 +214,7 @@ export default function Products() {
       <ToastContainer position="top-right" />
       <AddProductModal
         onSave={handleSaveClick}
+        onUpdate={handleUpdateClick}
         showProductModal={showProductModal}
         onClose={handleProductModalClose}
         headerText={isEditMode ? "Edit Product" : "Add Product"}
@@ -193,6 +231,7 @@ export default function Products() {
         ImageChange={handleImageChange}
         imagePreview={imagePreview}
         setImagePreview={setImagePreview}
+        isEditMode={isEditMode}
       />
     </Box>
   );
